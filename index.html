@@ -1,0 +1,270 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Phase 1 Salesforce Implementation | User Experience and Lessons Learned</title>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" />
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+</head>
+<body>
+  <div class="aurora aurora-one"></div>
+  <div class="aurora aurora-two"></div>
+  <div class="app-shell">
+    <aside class="side-panel" aria-label="Presentation navigation">
+      <div class="brand-block">
+        <div class="brand-mark">SF</div>
+        <div>
+          <p class="eyebrow">Interactive report</p>
+          <h1>Phase 1 Feedback</h1>
+        </div>
+      </div>
+      <nav id="slideNav" class="slide-nav"></nav>
+      <div class="side-footer">
+        <p>Use arrow keys or the controls below to move through the presentation.</p>
+      </div>
+    </aside>
+
+    <main class="deck" id="deck">
+      <header class="top-bar">
+        <div>
+          <span id="slideCounter">01 / 12</span>
+          <div class="progress-track"><div id="progressBar" class="progress-bar"></div></div>
+        </div>
+        <div class="top-actions">
+          <button class="ghost-button" id="overviewBtn">Overview</button>
+          <button class="ghost-button" id="printBtn">Print / PDF</button>
+        </div>
+      </header>
+
+      <section class="slide active title-slide" data-title="Opening">
+        <div class="hero-grid">
+          <div class="hero-copy">
+            <p class="eyebrow">Cardiff Community Housing Association</p>
+            <h2>Phase 1 Salesforce Implementation</h2>
+            <h3>User Experience and Lessons Learned</h3>
+            <p class="lead">An interactive presentation built from the Microsoft Forms feedback data, showing what users experienced, what is working, where confidence is low, and what must change before Phase 2.</p>
+            <div class="hero-tags">
+              <span>Training</span><span>Confidence</span><span>Readiness</span><span>Adoption</span><span>Phase 2</span>
+            </div>
+          </div>
+          <div class="hero-card glass-card">
+            <p class="mini-label">Headline insight</p>
+            <h4 id="heroHeadline"></h4>
+            <div class="confidence-meter" aria-label="Adoption readiness indicator">
+              <span>Readiness risk</span>
+              <div><b></b></div>
+            </div>
+            <p class="small-note">This is based on a small sample of 10 respondents, so the data should be treated as directional user feedback and lessons learned rather than a statistical survey.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide" data-title="Survey snapshot">
+        <div class="slide-heading">
+          <p class="eyebrow">01 · Survey snapshot</p>
+          <h2>Response overview</h2>
+          <p>The survey captured structured ratings and open-text feedback across the full Phase 1 user experience.</p>
+        </div>
+        <div class="metric-grid four" id="snapshotMetrics"></div>
+        <div class="content-grid two-thirds">
+          <div class="panel chart-panel"><canvas id="timelineChart"></canvas></div>
+          <div class="panel insight-panel">
+            <h3>How to read the results</h3>
+            <ul class="insight-list">
+              <li><b>Small sample:</b> 10 responses means each response represents 10 percentage points when all answered.</li>
+              <li><b>Strong qualitative signal:</b> repeated words such as training, system, team, information and upfront planning appear across multiple questions.</li>
+              <li><b>Action-focused:</b> the strongest value is in turning lessons learned into Phase 2 readiness controls.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide" data-title="Overall experience">
+        <div class="slide-heading">
+          <p class="eyebrow">02 · Overall experience</p>
+          <h2>Phase 1 experience was mixed to poor</h2>
+          <p>Most respondents did not rate the Phase 1 experience positively, which points to readiness and adoption gaps rather than lack of platform potential.</p>
+        </div>
+        <div class="content-grid two-thirds">
+          <div class="panel chart-panel"><canvas id="experienceChart"></canvas></div>
+          <div class="panel insight-panel warning">
+            <span class="stat-big">80%</span>
+            <h3>rated the overall experience as Poor or Fair</h3>
+            <p>The safest message is not that Phase 1 failed, but that Phase 1 created a foundation while revealing issues that must be resolved before Phase 2 scales further.</p>
+            <div class="quote-mini">“A more structured and transparent approach to readiness would have improved the go-live experience.”</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide" data-title="Confidence and usability">
+        <div class="slide-heading">
+          <p class="eyebrow">03 · Confidence and usability</p>
+          <h2>User confidence is a clear adoption risk</h2>
+          <p>No respondent selected “Yes, completely” when asked whether they felt confident using the system for day-to-day tasks.</p>
+        </div>
+        <div class="content-grid half">
+          <div class="panel chart-panel"><canvas id="confidenceChart"></canvas></div>
+          <div class="panel chart-panel"><canvas id="usabilityChart"></canvas></div>
+        </div>
+        <div class="insight-strip">
+          <div><b>0</b><span>fully confident users</span></div>
+          <div><b>7</b><span>users at some level of confidence risk</span></div>
+          <div><b>3</b><span>rated usability as difficult or very difficult</span></div>
+        </div>
+      </section>
+
+      <section class="slide" data-title="Training and support">
+        <div class="slide-heading">
+          <p class="eyebrow">04 · Training and support</p>
+          <h2>Training is the strongest recurring theme</h2>
+          <p>Feedback repeatedly calls for practical, team-specific, scenario-led training and refresher support.</p>
+        </div>
+        <div class="content-grid half">
+          <div class="panel chart-panel"><canvas id="trainingMentionsChart"></canvas></div>
+          <div class="panel chart-panel"><canvas id="trainingEffectivenessChart"></canvas></div>
+        </div>
+        <div class="quote-grid" id="trainingQuotes"></div>
+      </section>
+
+      <section class="slide" data-title="What is working">
+        <div class="slide-heading">
+          <p class="eyebrow">05 · What is working well</p>
+          <h2>The platform has visible potential</h2>
+          <p>Positive feedback is more cautious, but users identified benefits around case visibility, call summaries, dashboards and moving away from remote desktop.</p>
+        </div>
+        <div class="benefit-grid">
+          <article class="benefit-card"><span>01</span><h3>Case logging</h3><p>Some users found logging cases easy and liked the timeline view.</p></article>
+          <article class="benefit-card"><span>02</span><h3>Call handling</h3><p>Call summaries and callback tasks were described as easy to find and use.</p></article>
+          <article class="benefit-card"><span>03</span><h3>Single system</h3><p>Centralised information was seen as a positive foundation for consistency.</p></article>
+          <article class="benefit-card"><span>04</span><h3>Future reporting</h3><p>Dashboards and reporting were recognised as having potential once data and training mature.</p></article>
+        </div>
+        <div class="panel comment-carousel" id="workingWellCarousel"></div>
+      </section>
+
+      <section class="slide" data-title="Pain points">
+        <div class="slide-heading">
+          <p class="eyebrow">06 · Pain points</p>
+          <h2>The barriers are practical, not abstract</h2>
+          <p>The most common concerns relate to training, navigation, information visibility, data, testing and internal workload.</p>
+        </div>
+        <div class="content-grid two-thirds">
+          <div class="panel chart-panel"><canvas id="themesChart"></canvas></div>
+          <div class="panel insight-panel">
+            <h3>Theme explorer</h3>
+            <p>Select a theme to show matching comments.</p>
+            <div class="theme-pills" id="themePills"></div>
+            <div class="theme-comments" id="themeComments"></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide" data-title="Delivery lessons">
+        <div class="slide-heading">
+          <p class="eyebrow">07 · Delivery lessons</p>
+          <h2>Delivery needs stronger readiness control</h2>
+          <p>Users asked for more structured planning, clearer ownership, better session pacing, stronger requirements logging, and enough time for testing and re-testing.</p>
+        </div>
+        <div class="lesson-board">
+          <article><h3>Readiness</h3><p>Use go-live readiness criteria covering training, testing, data, support routes, communications and user access.</p></article>
+          <article><h3>Ownership</h3><p>Agree a simple RACI so users know who owns decisions, testing, data queries and sign-off.</p></article>
+          <article><h3>Workload</h3><p>Work with Heads of Service upfront to protect time for workshops, testing and training.</p></article>
+          <article><h3>Requirements</h3><p>Keep one structured requirements and test basis, not several disconnected spreadsheets or channels.</p></article>
+          <article><h3>Documentation</h3><p>Create field mapping, data dictionary, reporting guidance and quick reference guides.</p></article>
+          <article><h3>Scenario testing</h3><p>Use real cases and team-specific scenarios, particularly where work is complex or varies significantly.</p></article>
+        </div>
+      </section>
+
+      <section class="slide" data-title="Agile tools">
+        <div class="slide-heading">
+          <p class="eyebrow">08 · Agile tools</p>
+          <h2>Jira and Confluence were not clearly understood</h2>
+          <p>Most responses were neutral or negative, and several comments show users did not know what the tools were or how they were expected to use them.</p>
+        </div>
+        <div class="content-grid two-thirds">
+          <div class="panel chart-panel"><canvas id="agileChart"></canvas></div>
+          <div class="panel insight-panel warning">
+            <span class="stat-big">90%</span>
+            <h3>were neutral, challenging or very challenging</h3>
+            <p>Phase 2 needs a short “ways of working” onboarding session that explains Jira, Confluence, testing cycles, re-testing, decision logs and user responsibilities.</p>
+            <div id="agileQuotes" class="stacked-quotes"></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide" data-title="Phase 2 actions">
+        <div class="slide-heading">
+          <p class="eyebrow">09 · Phase 2 action plan</p>
+          <h2>Convert the feedback into delivery controls</h2>
+          <p>The recommendations below are designed to improve confidence, reduce rework and protect go-live readiness.</p>
+        </div>
+        <div class="roadmap" id="roadmap"></div>
+      </section>
+
+      <section class="slide" data-title="Question explorer">
+        <div class="slide-heading">
+          <p class="eyebrow">10 · All data points</p>
+          <h2>Question-by-question explorer</h2>
+          <p>This section keeps the presentation transparent by showing every question area and every anonymised response.</p>
+        </div>
+        <div class="explorer-layout">
+          <div class="panel explorer-controls">
+            <label for="questionSelect">Select a question</label>
+            <select id="questionSelect"></select>
+            <div id="questionSummary" class="question-summary"></div>
+          </div>
+          <div class="panel explorer-output">
+            <canvas id="explorerChart"></canvas>
+            <div id="explorerComments" class="explorer-comments"></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide" data-title="Recommendations">
+        <div class="slide-heading">
+          <p class="eyebrow">11 · Recommendations</p>
+          <h2>What should happen next</h2>
+          <p>The Phase 1 feedback should now be treated as a practical readiness checklist for Phase 2.</p>
+        </div>
+        <div class="recommendation-grid">
+          <article><span>1</span><h3>Run team-specific training</h3><p>Use real scenarios from each team rather than generic system demonstrations.</p></article>
+          <article><span>2</span><h3>Introduce a readiness gate</h3><p>Do not move to go-live until training, testing, data, access and support readiness are confirmed.</p></article>
+          <article><span>3</span><h3>Set up a clear hypercare model</h3><p>Define where users go for support, who triages issues and how feedback is tracked.</p></article>
+          <article><span>4</span><h3>Improve project communication</h3><p>Use one agreed route for updates, decisions, actions, FAQs and known issues.</p></article>
+          <article><span>5</span><h3>Explain Agile ways of working</h3><p>Give users a simple introduction to Jira, Confluence, UAT, re-testing and acceptance.</p></article>
+          <article><span>6</span><h3>Strengthen documentation</h3><p>Create field mapping, data dictionary, reporting guidance and quick reference guides.</p></article>
+        </div>
+      </section>
+
+      <section class="slide closing-slide" data-title="Closing">
+        <div class="closing-card glass-card">
+          <p class="eyebrow">12 · Closing message</p>
+          <h2>Phase 1 created the foundation. Phase 2 needs to create confidence.</h2>
+          <p>The feedback shows that users can see potential in Salesforce, but adoption will depend on practical training, clearer delivery controls, better support and more realistic planning around business workloads.</p>
+          <div class="closing-actions">
+            <button id="restartBtn" class="primary-button">Restart presentation</button>
+            <button id="copySummaryBtn" class="ghost-button light">Copy executive summary</button>
+          </div>
+        </div>
+      </section>
+
+      <footer class="deck-controls">
+        <button id="prevBtn" class="control-button">← Previous</button>
+        <div id="dotNav" class="dot-nav"></div>
+        <button id="nextBtn" class="control-button primary">Next →</button>
+      </footer>
+    </main>
+  </div>
+
+  <div id="overviewModal" class="modal" aria-hidden="true">
+    <div class="modal-card">
+      <button id="closeModalBtn" class="modal-close" aria-label="Close overview">×</button>
+      <h2>Presentation overview</h2>
+      <div id="overviewGrid" class="overview-grid"></div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
