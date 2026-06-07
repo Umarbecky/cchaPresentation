@@ -1,21 +1,74 @@
+<!-- 
+  This tells the browser that this document is an HTML5 web page.
+  HTML is the structure of the page, like the skeleton of the presentation.
+-->
 <!doctype html>
+
+<!-- 
+  This starts the HTML page.
+  lang="en" means the page content is written in English.
+-->
 <html lang="en">
 
 <head>
+  <!-- 
+    This sets the character format so the browser can read letters, symbols and punctuation correctly.
+  -->
   <meta charset="UTF-8" />
+
+  <!-- 
+    This makes the page responsive, so it adjusts properly on laptops, tablets and mobile screens.
+  -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- 
+    This is the title that appears on the browser tab.
+  -->
   <title>Phase 1 Salesforce Implementation | User Experience and Lessons Learned</title>
+
+  <!-- 
+    This helps the browser connect faster to the website where the chart library is hosted.
+  -->
   <link rel="preconnect" href="https://cdn.jsdelivr.net" />
+
+  <!-- 
+    This links the HTML page to the CSS file.
+    The CSS file controls the design, colours, layout, fonts and spacing.
+  -->
   <link rel="stylesheet" href="style.css" />
+
+  <!-- 
+    This loads Chart.js, which is the JavaScript library used to create the interactive charts.
+    Without this, the chart areas will not render as charts.
+  -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
 </head>
 
 <body>
+  <!-- 
+    These two aurora divs are decorative background elements.
+    They create the soft glowing background effect using CSS.
+  -->
   <div class="aurora aurora-one"></div>
   <div class="aurora aurora-two"></div>
 
+  <!-- 
+    app-shell is the main container for the whole presentation.
+    It holds the side navigation and the main slide deck.
+  -->
   <div class="app-shell">
+
+    <!-- 
+      This is the left-hand side panel.
+      It contains the presentation title and slide navigation.
+      aria-label helps screen readers understand that this area is for navigation.
+    -->
     <aside class="side-panel" aria-label="Presentation navigation">
+
+      <!-- 
+        This is the branding block at the top left.
+        It shows the SF badge and the presentation name.
+      -->
       <div class="brand-block">
         <div class="brand-mark">SF</div>
         <div>
@@ -24,39 +77,86 @@
         </div>
       </div>
 
+      <!-- 
+        This empty navigation area will be populated by JavaScript.
+        The JavaScript will automatically create a button for each slide.
+      -->
       <nav id="slideNav" class="slide-nav"></nav>
 
+      <!-- 
+        This is the small instruction text shown at the bottom of the side panel.
+      -->
       <div class="side-footer">
         <p>Use arrow keys or the controls below to move through the presentation.</p>
       </div>
     </aside>
 
+    <!-- 
+      This is the main presentation area.
+      All slides sit inside this deck.
+    -->
     <main class="deck" id="deck">
+
+      <!-- 
+        This is the top bar above the slides.
+        It shows the slide counter, progress bar, overview button and print button.
+      -->
       <header class="top-bar">
         <div>
+          <!-- 
+            JavaScript updates this number as the user moves through the slides.
+          -->
           <span id="slideCounter">01 / 12</span>
+
+          <!-- 
+            This is the progress bar track.
+            The coloured progress bar inside it grows as the user moves through the presentation.
+          -->
           <div class="progress-track">
             <div id="progressBar" class="progress-bar"></div>
           </div>
         </div>
 
+        <!-- 
+          These are the buttons at the top right.
+          Overview opens the slide overview.
+          Print / PDF allows the page to be printed or saved as a PDF.
+        -->
         <div class="top-actions">
           <button class="ghost-button" id="overviewBtn">Overview</button>
           <button class="ghost-button" id="printBtn">Print / PDF</button>
         </div>
       </header>
 
+      <!-- 
+        SLIDE 1: Opening slide.
+        The class "active" means this is the first slide shown when the presentation opens.
+        data-title is used by JavaScript to create the slide navigation label.
+      -->
       <section class="slide active title-slide" data-title="Opening">
+
+        <!-- 
+          This grid splits the opening slide into two main areas:
+          left side for the title and right side for the headline insight.
+        -->
         <div class="hero-grid">
+
+          <!-- 
+            This is the main written content on the opening slide.
+          -->
           <div class="hero-copy">
             <p class="eyebrow">Cardiff Community Housing Association</p>
             <h2>Phase 1 Salesforce Implementation</h2>
             <h3>User Experience and Lessons Learned</h3>
+
             <p class="lead">
               An interactive presentation built from Microsoft Forms feedback data, showing what users experienced,
               what is working, where support is still needed, and what should be strengthened before Phase 2.
             </p>
 
+            <!-- 
+              These are small topic tags that summarise the main themes of the presentation.
+            -->
             <div class="hero-tags">
               <span>Training</span>
               <span>Confidence</span>
@@ -66,15 +166,30 @@
             </div>
           </div>
 
+          <!-- 
+            This card shows the headline insight.
+            The actual headline text is inserted by JavaScript using the id "heroHeadline".
+          -->
           <div class="hero-card glass-card">
             <p class="mini-label">Headline insight</p>
+
+            <!-- 
+              JavaScript fills this with the headline from the survey data.
+            -->
             <h4 id="heroHeadline"></h4>
 
+            <!-- 
+              This is a visual readiness indicator.
+              The design is controlled in CSS.
+            -->
             <div class="confidence-meter" aria-label="Adoption readiness indicator">
               <span>Adoption opportunity</span>
               <div><b></b></div>
             </div>
 
+            <!-- 
+              This note explains that the survey sample is small and should be treated carefully.
+            -->
             <p class="small-note">
               This is based on a small sample of 10 respondents, so the data should be treated as directional user
               feedback and lessons learned rather than a statistical survey.
@@ -83,6 +198,10 @@
         </div>
       </section>
 
+      <!-- 
+        SLIDE 2: Survey snapshot.
+        This slide gives a quick overview of the number of responses, timeline and how to interpret the results.
+      -->
       <section class="slide" data-title="Survey snapshot">
         <div class="slide-heading">
           <p class="eyebrow">01 · Survey snapshot</p>
@@ -93,13 +212,27 @@
           </p>
         </div>
 
+        <!-- 
+          JavaScript fills this section with cards such as responses, duration and average completion time.
+        -->
         <div class="metric-grid four" id="snapshotMetrics"></div>
 
+        <!-- 
+          This section has two columns:
+          left column for a chart, right column for explanation.
+        -->
         <div class="content-grid two-thirds">
+
+          <!-- 
+            This canvas is where Chart.js will draw the response timeline chart.
+          -->
           <div class="panel chart-panel">
             <canvas id="timelineChart"></canvas>
           </div>
 
+          <!-- 
+            This panel explains how the survey findings should be interpreted.
+          -->
           <div class="panel insight-panel">
             <h3>How to read the results</h3>
             <ul class="insight-list">
@@ -120,6 +253,10 @@
         </div>
       </section>
 
+      <!-- 
+        SLIDE 3: Overall experience.
+        This slide shows how respondents rated their overall Phase 1 experience.
+      -->
       <section class="slide" data-title="Overall experience">
         <div class="slide-heading">
           <p class="eyebrow">02 · Overall experience</p>
@@ -131,10 +268,17 @@
         </div>
 
         <div class="content-grid two-thirds">
+
+          <!-- 
+            This canvas is where the overall experience chart will appear.
+          -->
           <div class="panel chart-panel">
             <canvas id="experienceChart"></canvas>
           </div>
 
+          <!-- 
+            This panel highlights the key statistic from the chart.
+          -->
           <div class="panel insight-panel success">
             <span class="stat-big">60%</span>
             <h3>rated the overall experience as Good or Very Good</h3>
@@ -144,6 +288,9 @@
               improve user readiness, training, communication and post-go-live support.
             </p>
 
+            <!-- 
+              This is a supporting quote from the survey feedback.
+            -->
             <div class="quote-mini">
               “A more structured and transparent approach to readiness would have improved the go-live experience.”
             </div>
@@ -151,6 +298,10 @@
         </div>
       </section>
 
+      <!-- 
+        SLIDE 4: Confidence and usability.
+        This slide compares how confident users feel with how easy the system is to use.
+      -->
       <section class="slide" data-title="Confidence and usability">
         <div class="slide-heading">
           <p class="eyebrow">03 · Confidence and usability</p>
@@ -162,6 +313,10 @@
           </p>
         </div>
 
+        <!-- 
+          Two charts are shown side by side:
+          one for confidence and one for usability.
+        -->
         <div class="content-grid half">
           <div class="panel chart-panel">
             <canvas id="confidenceChart"></canvas>
@@ -172,6 +327,9 @@
           </div>
         </div>
 
+        <!-- 
+          These are the three main takeaway figures from this slide.
+        -->
         <div class="insight-strip">
           <div>
             <b>67%</b>
@@ -190,6 +348,10 @@
         </div>
       </section>
 
+      <!-- 
+        SLIDE 5: Training and support.
+        This slide explains that training is the strongest theme across the feedback.
+      -->
       <section class="slide" data-title="Training and support">
         <div class="slide-heading">
           <p class="eyebrow">04 · Training and support</p>
@@ -200,6 +362,11 @@
           </p>
         </div>
 
+        <!-- 
+          These two charts show:
+          1. Where training was mentioned across questions.
+          2. How effective respondents felt training and support were.
+        -->
         <div class="content-grid half">
           <div class="panel chart-panel">
             <canvas id="trainingMentionsChart"></canvas>
@@ -210,6 +377,9 @@
           </div>
         </div>
 
+        <!-- 
+          These are the main training-related statistics.
+        -->
         <div class="insight-strip">
           <div>
             <b>78%</b>
@@ -227,9 +397,16 @@
           </div>
         </div>
 
+        <!-- 
+          JavaScript fills this with short training-related quotes.
+        -->
         <div class="quote-grid" id="trainingQuotes"></div>
       </section>
 
+      <!-- 
+        SLIDE 6: What is working.
+        This slide balances the presentation by showing positive feedback and system potential.
+      -->
       <section class="slide" data-title="What is working">
         <div class="slide-heading">
           <p class="eyebrow">05 · What is working well</p>
@@ -240,6 +417,9 @@
           </p>
         </div>
 
+        <!-- 
+          These cards summarise the areas users said are working well.
+        -->
         <div class="benefit-grid">
           <article class="benefit-card">
             <span>01</span>
@@ -256,19 +436,28 @@
           <article class="benefit-card">
             <span>03</span>
             <h3>Single system</h3>
-            <p>Centralised information was seen as a positive foundation for consistency, visibility and future process improvement.</p>
+            <p>Centralised information was seen as a positive foundation for consistency, visibility and future process
+              improvement.</p>
           </article>
 
           <article class="benefit-card">
             <span>04</span>
             <h3>Future reporting</h3>
-            <p>Dashboards and reporting were recognised as having potential once data, training and documentation mature.</p>
+            <p>Dashboards and reporting were recognised as having potential once data, training and documentation
+              mature.</p>
           </article>
         </div>
 
+        <!-- 
+          JavaScript uses this area to rotate through positive open-text comments.
+        -->
         <div class="panel comment-carousel" id="workingWellCarousel"></div>
       </section>
 
+      <!-- 
+        SLIDE 7: Pain points.
+        This slide shows the key problem areas raised through the open-text responses.
+      -->
       <section class="slide" data-title="Pain points">
         <div class="slide-heading">
           <p class="eyebrow">06 · Pain points</p>
@@ -280,19 +469,38 @@
         </div>
 
         <div class="content-grid two-thirds">
+
+          <!-- 
+            This chart shows the frequency of themes found in the open-text responses.
+          -->
           <div class="panel chart-panel">
             <canvas id="themesChart"></canvas>
           </div>
 
+          <!-- 
+            This panel allows the user to click a theme and see related comments.
+          -->
           <div class="panel insight-panel">
             <h3>Theme explorer</h3>
             <p>Select a theme to show matching comments from the open-text feedback.</p>
+
+            <!-- 
+              JavaScript fills this area with clickable theme buttons.
+            -->
             <div class="theme-pills" id="themePills"></div>
+
+            <!-- 
+              JavaScript displays matching comments here after a theme is selected.
+            -->
             <div class="theme-comments" id="themeComments"></div>
           </div>
         </div>
       </section>
 
+      <!-- 
+        SLIDE 8: Delivery lessons.
+        This slide turns the feedback into delivery lessons for the project team.
+      -->
       <section class="slide" data-title="Delivery lessons">
         <div class="slide-heading">
           <p class="eyebrow">07 · Delivery lessons</p>
@@ -303,10 +511,14 @@
           </p>
         </div>
 
+        <!-- 
+          These cards summarise the key lessons that should be applied before Phase 2.
+        -->
         <div class="lesson-board">
           <article>
             <h3>Readiness</h3>
-            <p>Use go-live readiness criteria covering training, testing, data, support routes, communications and user access.</p>
+            <p>Use go-live readiness criteria covering training, testing, data, support routes, communications and user
+              access.</p>
           </article>
 
           <article>
@@ -321,21 +533,28 @@
 
           <article>
             <h3>Requirements</h3>
-            <p>Keep one structured requirements and test basis to reduce duplicated spreadsheets, missed decisions and rework.</p>
+            <p>Keep one structured requirements and test basis to reduce duplicated spreadsheets, missed decisions and
+              rework.</p>
           </article>
 
           <article>
             <h3>Documentation</h3>
-            <p>Create field mapping, data dictionary, reporting guidance, quick reference guides and known-issue logs.</p>
+            <p>Create field mapping, data dictionary, reporting guidance, quick reference guides and known-issue logs.
+            </p>
           </article>
 
           <article>
             <h3>Scenario testing</h3>
-            <p>Use real cases and team-specific scenarios, particularly where work is complex or varies significantly.</p>
+            <p>Use real cases and team-specific scenarios, particularly where work is complex or varies significantly.
+            </p>
           </article>
         </div>
       </section>
 
+      <!-- 
+        SLIDE 9: Agile tools.
+        This slide explains the Jira and Confluence feedback.
+      -->
       <section class="slide" data-title="Agile tools">
         <div class="slide-heading">
           <p class="eyebrow">08 · Agile tools</p>
@@ -348,10 +567,17 @@
         </div>
 
         <div class="content-grid two-thirds">
+
+          <!-- 
+            This chart shows how users rated the move to Agile tools such as Jira and Confluence.
+          -->
           <div class="panel chart-panel">
             <canvas id="agileChart"></canvas>
           </div>
 
+          <!-- 
+            This panel explains the chart in plain English.
+          -->
           <div class="panel insight-panel warning">
             <span class="stat-big">Mixed</span>
             <h3>smooth for some users, challenging for others</h3>
@@ -365,11 +591,18 @@
               “Useful to see progress.”
             </div>
 
+            <!-- 
+              This area can be used by JavaScript if you want to show additional Agile-related comments.
+            -->
             <div id="agileQuotes" class="stacked-quotes"></div>
           </div>
         </div>
       </section>
 
+      <!-- 
+        SLIDE 10: Phase 2 action plan.
+        This slide shows what should happen next.
+      -->
       <section class="slide" data-title="Phase 2 actions">
         <div class="slide-heading">
           <p class="eyebrow">09 · Phase 2 action plan</p>
@@ -380,25 +613,45 @@
           </p>
         </div>
 
+        <!-- 
+          JavaScript fills this area with the Phase 2 roadmap actions.
+        -->
         <div class="roadmap" id="roadmap"></div>
       </section>
 
+      <!-- 
+        SLIDE 11: Question explorer.
+        This is the interactive data explorer.
+        It lets the user choose any survey question and see the responses.
+      -->
       <section class="slide" data-title="Question explorer">
         <div class="slide-heading">
           <p class="eyebrow">10 · All data points</p>
           <h2>Question-by-question explorer</h2>
           <p>
-            This section keeps the presentation transparent by showing every question area and every anonymised response.
+            This section keeps the presentation transparent by showing every question area and every anonymised
+            response.
           </p>
         </div>
 
         <div class="explorer-layout">
+
+          <!-- 
+            The dropdown is filled by JavaScript with all survey questions.
+          -->
           <div class="panel explorer-controls">
             <label for="questionSelect">Select a question</label>
             <select id="questionSelect"></select>
+
+            <!-- 
+              JavaScript shows a summary of the selected question here.
+            -->
             <div id="questionSummary" class="question-summary"></div>
           </div>
 
+          <!-- 
+            This area displays either a chart or the open-text responses, depending on the selected question.
+          -->
           <div class="panel explorer-output">
             <canvas id="explorerChart"></canvas>
             <div id="explorerComments" class="explorer-comments"></div>
@@ -406,6 +659,10 @@
         </div>
       </section>
 
+      <!-- 
+        SLIDE 12: Recommendations.
+        This slide summarises the main recommended actions.
+      -->
       <section class="slide" data-title="Recommendations">
         <div class="slide-heading">
           <p class="eyebrow">11 · Recommendations</p>
@@ -415,6 +672,9 @@
           </p>
         </div>
 
+        <!-- 
+          These six cards show the key recommendations from the feedback.
+        -->
         <div class="recommendation-grid">
           <article>
             <span>1</span>
@@ -454,6 +714,10 @@
         </div>
       </section>
 
+      <!-- 
+        FINAL SLIDE: Closing message.
+        This summarises the whole story and gives buttons to restart or copy the executive summary.
+      -->
       <section class="slide closing-slide" data-title="Closing">
         <div class="closing-card glass-card">
           <p class="eyebrow">12 · Closing message</p>
@@ -471,22 +735,48 @@
         </div>
       </section>
 
+      <!-- 
+        These are the bottom navigation controls.
+        They allow users to move backwards and forwards through the presentation.
+      -->
       <footer class="deck-controls">
         <button id="prevBtn" class="control-button">← Previous</button>
+
+        <!-- 
+          JavaScript fills this with small dots, one for each slide.
+        -->
         <div id="dotNav" class="dot-nav"></div>
+
         <button id="nextBtn" class="control-button primary">Next →</button>
       </footer>
     </main>
   </div>
 
+  <!-- 
+    This is the slide overview popup.
+    It stays hidden until the user clicks the Overview button.
+  -->
   <div id="overviewModal" class="modal" aria-hidden="true">
     <div class="modal-card">
+
+      <!-- 
+        This button closes the overview popup.
+      -->
       <button id="closeModalBtn" class="modal-close" aria-label="Close overview">×</button>
+
       <h2>Presentation overview</h2>
+
+      <!-- 
+        JavaScript fills this area with a grid of slide titles.
+      -->
       <div id="overviewGrid" class="overview-grid"></div>
     </div>
   </div>
 
+  <!-- 
+    This links the page to the JavaScript file.
+    The JavaScript controls the interactivity, slide movement, charts, dropdowns, overview popup and copied summary.
+  -->
   <script src="script.js"></script>
 </body>
 
